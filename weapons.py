@@ -3,6 +3,7 @@ from enum import Enum
 
 
 class Die:
+    """A singular Dice"""
     def __init__(self, sides):
         self.sides = sides
 
