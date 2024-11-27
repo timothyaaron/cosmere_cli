@@ -29,6 +29,8 @@ class Traits(metaclass=MetaEnum):
     DISCREET = "Discreet"
     INDIRECT = "Indirect"
     LOADED = "Loaded"
+    LOSES_DANGEROUS = "Loses Dangerous"
+    LOSES_TWO_HANDED = "Loses Two-Handed"
     MOMENTUM = "Momentum"
     OFFHAND = "Offhand"
     PIERCE = "Pierce"
@@ -77,6 +79,9 @@ class Weapon:
         self.expert_traits = expert_traits
         self.weapons_skills = weapons_skill
         self.price = price
+
+    def __repr__(self):
+        return self.name
 
     def roll_damage(self):
         return sum([d.roll() for d in self.damage])
@@ -143,11 +148,11 @@ class Weapons(metaclass=MetaEnum):
         name="Axe", description="A simple battle axe.",
         category=Categories.HEAVY, weapons_skill="Heavy",
         damage=[Dice.SIX], damage_type=DamageTypes.KEEN, range_=Ranges.MELEE,
-        traits=[Traits.THROWN_S], expert_traits=Traits.OFFHAND,
+        traits=[Traits.THROWN_S], expert_traits=[Traits.OFFHAND],
         price=20)
     GREATSWORD = Weapon(
         name="Greatsword", description="A very large and sword meant not for the weak of heart.",
-        category="Heavy Weapons", weapons_skill="Heavy",
+        category=Categories.HEAVY, weapons_skill="Heavy",
         damage=[Dice.TEN], damage_type=DamageTypes.KEEN, range_=Ranges.MELEE,
         traits=[Traits.TWO_HANDED], expert_traits=[Traits.DEADLY],
         price=200)
@@ -167,7 +172,7 @@ class Weapons(metaclass=MetaEnum):
         name="Longsword", description="this sword is a bit larger than a normal sword.",
         category=Categories.HEAVY, weapons_skill="Heavy",
         damage=[Dice.EIGHT], damage_type=DamageTypes.KEEN, range_=Ranges.MELEE,
-        traits=[Traits.TWO_HANDED], expert_traits=["Loses two handed"],
+        traits=[Traits.TWO_HANDED], expert_traits=[Traits.LOSES_TWO_HANDED],
         price=60)
     POLEAXE = Weapon(
         name="Poleaxe", description="An axe that is put onto the end of a spear.",
@@ -198,15 +203,15 @@ class Weapons(metaclass=MetaEnum):
     UNARMED_ATTACK = Weapon(
         name="Unarmed Attack", description="An attack used without a weapon.",
         category=Categories.SPECIAL, weapons_skill="Athletics",
-        damage=["Different per"], damage_type=DamageTypes.IMPACT, range_=Ranges.MELEE,
+        damage=[Dice.FOUR], damage_type=DamageTypes.IMPACT, range_=Ranges.MELEE,
         traits=[Traits.UNIQUE], expert_traits=[Traits.MOMENTUM, Traits.OFFHAND],
-        price="This is your hand. It didn't cost to get it.",
-    )
+        price=0,
+    )  # damage=["Different per"], price="This is your hand. It didn't cost to get it."
     SHARDBLADE = Weapon(
         name="Shardblade", description="The leftover of a dead spren that was once bonded with a Kights Radiant. Now the most dangerous weapon on Roshar",
         category=Categories.SPECIAL, weapons_skill="Heavy",
         damage=[Dice.EIGHT, Dice.EIGHT], damage_type=DamageTypes.SPIRIT, range_=Ranges.MELEE,
-        traits=[Traits.DANGEROUS, Traits.DEADLY, Traits.UNIQUE], expert_traits=["Loses Dangerous"],
+        traits=[Traits.DANGEROUS, Traits.DEADLY, Traits.UNIQUE], expert_traits=[Traits.LOSES_DANGEROUS],
         price="Priceless")
     # RADIANT_SHARDBLADE
 
