@@ -1,6 +1,4 @@
-"""A Cosmere RPG Text User Interface"""
-from enum import Enum
-
+"""Roshar Characters"""
 
 class Talent:
     def __init__(self, name, description, children):
