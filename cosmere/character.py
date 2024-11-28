@@ -1,7 +1,9 @@
 """Roshar Characters"""
 
-class Talent:
-    def __init__(self, name, description, children):
+class Character:
+    def __init__(self, name):
         self.name = name
-        self.description = description
-        self.children = children
+        self.culture = None
+
+    def __repr__(self):
+        return f"{self.name} is {self.culture}"

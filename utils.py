@@ -18,7 +18,10 @@ class MetaEnum(type):
         return len(cls._as_list())
 
     def __getitem__(cls, index):
-        return cls._as_list()[index]
+        if isinstance(index, int):
+            return cls._as_list()[index]
+
+        return getattr(cls, index.upper())
 
     @classmethod
     def _as_list(mcs):
